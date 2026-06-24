@@ -34,6 +34,13 @@
       --bg:#f3f4f6;
     }
     *{box-sizing:border-box}
+    html, body, .sheet, .sheet *, .tag, .tag *{
+      -webkit-print-color-adjust:exact!important;
+      print-color-adjust:exact!important;
+      color-adjust:exact!important;
+      forced-color-adjust:none;
+    }
+    html{color-scheme:light}
     body{margin:0;font-family:Inter,Arial,Helvetica,sans-serif;background:var(--bg);color:var(--ink)}
     header{position:sticky;top:0;z-index:10;background:#111827;color:#fff;padding:12px 18px;display:flex;align-items:center;justify-content:space-between;gap:12px;box-shadow:0 4px 18px rgba(0,0,0,.2)}
     header h1{font-size:18px;margin:0;letter-spacing:.2px}
@@ -129,6 +136,17 @@
     .bulkActions .miniField{width:130px}
     .bulkActions .wideField{width:180px}
     .countBadge{display:inline-flex;align-items:center;justify-content:center;background:#111827;color:#fff;border-radius:999px;padding:5px 9px;font-size:12px;font-weight:800}
+
+    .staffIntroBox{background:linear-gradient(135deg,#fff7ed,#ffffff);border:2px solid color-mix(in srgb,var(--primary) 45%,#fff);border-radius:18px;padding:14px;margin:14px 0;box-shadow:0 12px 28px rgba(215,25,32,.10);position:relative;overflow:hidden}
+    .staffIntroBox:before{content:"";position:absolute;inset:0;background:radial-gradient(circle at top right,color-mix(in srgb,var(--secondary) 28%,transparent),transparent 36%);pointer-events:none}
+    .staffIntroBox h2{position:relative;margin:0 0 8px!important;color:#111827}
+    .staffIntroLead{position:relative;font-size:12.5px;color:#374151;font-weight:800;line-height:1.35;margin:0 0 10px}
+    .stepGrid{position:relative;display:grid;grid-template-columns:1fr;gap:7px;margin:10px 0}
+    .stepItem{background:#fff;border:1px solid #e5e7eb;border-radius:12px;padding:9px 10px;display:flex;gap:9px;align-items:flex-start;line-height:1.25;font-size:12px;color:#1f2937;font-weight:750}
+    .stepNo{background:var(--primary);color:#fff;border-radius:999px;min-width:23px;height:23px;display:inline-flex;align-items:center;justify-content:center;font-size:11px;font-weight:1000;box-shadow:0 2px 0 rgba(0,0,0,.18)}
+    .glowGuideBtn{position:relative;width:100%;font-size:14px;padding:13px 14px;border:2px solid var(--primary);background:var(--secondary);animation:vardaPulse 1.55s ease-in-out infinite;box-shadow:0 0 0 0 color-mix(in srgb,var(--primary) 45%,transparent)}
+    .glowGuideBtn:after{content:"👇 UNANG GAWIN";position:absolute;right:10px;top:-11px;background:var(--primary);color:#fff;border-radius:999px;font-size:9px;padding:3px 7px;letter-spacing:.04em}
+    @keyframes vardaPulse{0%,100%{transform:translateY(0);box-shadow:0 0 0 0 color-mix(in srgb,var(--primary) 32%,transparent)}50%{transform:translateY(-2px);box-shadow:0 0 0 7px rgba(215,25,32,0)}}
     .printOnly{display:none}
     @media(max-width:1100px){.app{grid-template-columns:1fr}.previewPanel{position:static}.paperStage{max-height:none}}
 
@@ -145,7 +163,13 @@
     body:not(.access-locked) .accessOverlay{display:none}
 
     @media print{
-      body{background:white}
+      *{
+        -webkit-print-color-adjust:exact!important;
+        print-color-adjust:exact!important;
+        color-adjust:exact!important;
+        forced-color-adjust:none!important;
+      }
+      body{background:white!important}
       header,.leftPanel,.previewTop,.toast{display:none!important}
       .app{display:block;padding:0}
       .previewPanel{position:static;padding:0;box-shadow:none;border:0}
@@ -175,10 +199,11 @@
     <span class="modeBadge" id="modeBadge">Staff Mode</span>
     <button class="secondary" id="aboutBtn">About / Protection</button>
     <button class="secondary" id="adminBtn">Admin Unlock</button>
+    <button class="secondary" id="masterBtn">Master Control</button>
     <button class="secondary" id="estimateAllBtn">Generate Nutrition</button>
-    <button id="printBtn">Print This</button>
-    <button class="secondary" id="saveBtn">Save JSON</button>
-    <label class="fileLabel" for="importJson">Import JSON</label>
+    <button id="printBtn">I-print Ito</button>
+    <button class="secondary" id="saveBtn">Save File</button>
+    <label class="fileLabel" for="importJson">Import File</label>
     <input id="importJson" type="file" accept="application/json" hidden>
   </div>
 </header>
@@ -218,9 +243,22 @@
       <button class="danger" id="clearBtn">Clear</button>
     </div>
 
+    <div class="staffIntroBox" id="staffIntroBox">
+      <h2><span>▶</span> Gabay sa Paggamit</h2>
+      <p class="staffIntroLead">Sundin lang ang maikling steps na ito para mabilis gumawa ng official Varda price tags.</p>
+      <button class="glowGuideBtn" id="pasteGuideBtn" type="button">I-paste ang Listahan ng Ulam Dito</button>
+      <div class="stepGrid">
+        <div class="stepItem"><span class="stepNo">1</span><div><b>I-paste o i-type</b> ang listahan ng ulam, isang item bawat linya.</div></div>
+        <div class="stepItem"><span class="stepNo">2</span><div>I-click ang <b>Gumawa ng Printable Tags</b>.</div></div>
+        <div class="stepItem"><span class="stepNo">3</span><div>I-review ang <b>calories, allergen, presyo, half price, at notes</b>.</div></div>
+        <div class="stepItem"><span class="stepNo">4</span><div>I-adjust ang <b>tag size sa cm</b>, paper size, o presyo kung kailangan.</div></div>
+        <div class="stepItem"><span class="stepNo">5</span><div>I-click ang <b>I-print Ito</b> at siguraduhin naka-ON ang <b>Background Graphics</b>.</div></div>
+      </div>
+    </div>
+
     <div class="bulkPasteBox">
       <h2 style="margin-bottom:8px"><span>2</span> Fast paste menu generator</h2>
-      <label>Paste food names — one menu per line</label>
+      <label>I-paste ang food/ulam names — isang menu kada linya</label>
       <textarea id="bulkNames" placeholder="ADOBO PORK
 GINISANG SAYOTE
 BEEF CALDERETA
@@ -228,12 +266,12 @@ CHICKEN INASAL">ADOBO PORK
 GINISANG SAYOTE
 BEEF CALDERETA
 CHICKEN INASAL</textarea>
-      <div class="hint">Default is <b>120g per serving</b>. It will auto-create printable tags with calories/allergens. You can also paste: <b>Food Name | Full Price | Grams</b>. Half price starts at 50% of full price but remains editable per viand.</div>
+      <div class="hint">Default ay <b>120g per serving</b>. Automatic gagawa ito ng printable tags na may calories/allergens. Pwede rin format: <b>Food Name | Full Price | Grams</b>. Half price starts at 50% pero editable pa rin per viand.</div>
       <div class="bulkActions">
         <div class="miniField"><label>Default grams</label><input id="bulkDefaultGrams" type="number" value="120" min="1"></div>
         <div class="miniField"><label>Default full ₱</label><input id="bulkDefaultFull" type="number" placeholder="optional"></div>
         <div class="wideField"><label>Action</label><select id="bulkMode"><option value="replace">Replace current list</option><option value="append">Add to current list</option></select></div>
-        <button id="bulkGenerateBtn">Make Tags Now</button>
+        <button id="bulkGenerateBtn">Gumawa ng Printable Tags</button>
         <span id="bulkCount" class="countBadge">0 items</span>
       </div>
     </div>
@@ -258,6 +296,7 @@ CHICKEN INASAL</textarea>
     <div class="previewTop">
       <h2 style="margin:0"><span>4</span> Live print preview</h2>
       <div class="scaleBox">Preview zoom <input id="zoom" type="range" min="0.35" max="1" value="0.72" step="0.01"><span id="zoomLabel">72%</span></div>
+      <div class="hint full" style="width:100%;margin-top:0"><b>Print color tip:</b> Sa Chrome/Edge print window, piliin ang <b>Color</b> at i-ON ang <b>Background graphics</b> kung maputla o iba ang kulay sa preview.</div>
     </div>
     <div class="paperStage">
       <div id="sheet" class="sheet bold"></div>
@@ -279,7 +318,7 @@ CHICKEN INASAL</textarea>
         <div><b>Date Created</b><br>June 2026</div>
         <div><b>Position</b><br>National Retail Head of Varda Group</div>
         <div><b>Mode</b><br><span id="aboutModeText">Staff Mode</span></div>
-        <div><b>Version</b><br>Protected Offline HTML</div>
+        <div><b>Version</b><br>Protected Offline HTML · Exact Print Colors</div>
         <div><b>Operation</b><br>Works offline in Chrome or Microsoft Edge.</div>
       </div>
       <div class="protectionBox">
@@ -289,12 +328,46 @@ CHICKEN INASAL</textarea>
         <b>Protection Note:</b> This file has staff access password, staff-mode lock, copy/right-click deterrent, shortcut blocking, and official-use notice. Because it is an offline HTML file, it cannot be 100% copy-proof if someone has the file. For stronger protection, use an online version with login and server control.
       </div>
       <p><b>Staff can edit:</b> menu names, grams, prices, half-price availability, calories, allergens, notes, paper size, orientation, columns, and actual tag width/height in cm.</p>
-      <p><b>Admin unlock controls:</b> brand name, logo, colors, design style, font size, price size, and save/export function.</p>
+      <p><b>Admin unlock controls:</b> brand name, logo, colors, design style, font size, price size, and Save File / Import File function.</p>
+      <p><b>Master Control:</b> supervisor-only password panel for changing the Staff Opening Password and Admin Unlock Password.</p>
       <div class="protectedFoot">© Varda Group. Created by Edmar Rizabal Casuncad, June 2026. Unauthorized copying, modification, resale, distribution, or use outside Varda Group is not allowed. Protection code: VFG-PTG-2026.</div>
     </div>
   </div>
 </div>
 
+
+<div class="modalOverlay" id="masterModal" aria-hidden="true">
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="masterTitle">
+    <div class="modalHead">
+      <h2 id="masterTitle">🔑 Master Control</h2>
+      <button class="secondary small" id="closeMasterBtn">Close</button>
+    </div>
+    <div class="modalBody">
+      <b>Change Default Passwords</b>
+      <p class="hint">This panel is for authorized supervisor/master use only. Changes are saved in this browser/device.</p>
+      <div class="protectionBox">
+        <b>Reminder:</b> Use the Master Password only to update the staff opening password and admin unlock password. Do not share the Master Password with staff.
+      </div>
+      <div class="controls">
+        <div class="full">
+          <label>Staff opening password</label>
+          <input id="masterStaffPassword" type="text" autocomplete="off" placeholder="Enter new staff password">
+          <div class="hint">This is the password staff enter when opening the generator.</div>
+        </div>
+        <div class="full">
+          <label>Admin unlock password</label>
+          <input id="masterAdminPassword" type="text" autocomplete="off" placeholder="Enter new admin password">
+          <div class="hint">This is the password used for Admin Unlock design/system settings.</div>
+        </div>
+      </div>
+      <div class="toolbarLine">
+        <button id="saveMasterPasswordsBtn" type="button">Save Passwords</button>
+        <button class="secondary" id="resetMasterPasswordsBtn" type="button">Reset to Default</button>
+      </div>
+      <div class="protectedFoot">Default staff password: SIRMIKEY123? · Default admin password: VARDA2026 · Master access password: MASTERMIKEY</div>
+    </div>
+  </div>
+</div>
 
 <script>
 const nutritionDB = [
@@ -333,8 +406,15 @@ const sampleMenus = [
   {name:'CHICKEN INASAL', grams:120, fullPrice:'', halfPrice:'', halfAvailable:true, notes:''}
 ];
 
-const ADMIN_PASSWORD = 'VARDA2026';
-const STAFF_ACCESS_PASSWORD = 'SIRMIKEY123?';
+const DEFAULT_ADMIN_PASSWORD = 'VARDA2026';
+const DEFAULT_STAFF_ACCESS_PASSWORD = 'SIRMIKEY123?';
+const MASTER_PASSWORD = 'MASTERMIKEY';
+function getAdminPassword(){ return localStorage.getItem('vardaAdminPassword') || DEFAULT_ADMIN_PASSWORD; }
+function getStaffPassword(){ return localStorage.getItem('vardaStaffPassword') || DEFAULT_STAFF_ACCESS_PASSWORD; }
+function setSavedPasswords(staffPass, adminPass){
+  if(staffPass) localStorage.setItem('vardaStaffPassword', staffPass);
+  if(adminPass) localStorage.setItem('vardaAdminPassword', adminPass);
+}
 const adminOnlyIds = ['brandName','logoUpload','primaryColor','secondaryColor','accentColor','tagStyle','fontScale','priceScale','saveBtn'];
 function isFormTarget(el){ return el && ['INPUT','TEXTAREA','SELECT','BUTTON','LABEL'].includes(el.tagName); }
 function isAdminUnlocked(){ return sessionStorage.getItem('vardaAdminUnlocked') === 'yes'; }
@@ -383,7 +463,7 @@ function bindStaffAccess(){
   form.addEventListener('submit', e=>{
     e.preventDefault();
     const pass = ($('accessPassword')?.value || '').trim();
-    if(pass === STAFF_ACCESS_PASSWORD){
+    if(pass === getStaffPassword()){
       sessionStorage.setItem('vardaStaffAccess','yes');
       $('accessPassword').value = '';
       $('accessError')?.classList.remove('show');
@@ -406,8 +486,43 @@ function bindProtection(){
       setAdminMode(false); toast('Admin settings locked.'); return;
     }
     const pass = prompt('Enter admin password to unlock protected design settings:');
-    if(pass === ADMIN_PASSWORD){ setAdminMode(true); toast('Admin settings unlocked.'); }
+    if(pass === getAdminPassword()){ setAdminMode(true); toast('Admin settings unlocked.'); }
     else if(pass !== null){ toast('Wrong admin password.'); }
+  });
+  $('masterBtn')?.addEventListener('click',()=>{
+    const pass = prompt('Enter master password:');
+    if(pass === MASTER_PASSWORD){
+      $('masterStaffPassword').value = getStaffPassword();
+      $('masterAdminPassword').value = getAdminPassword();
+      $('masterModal').classList.add('show');
+      toast('Master Control opened.');
+    }else if(pass !== null){
+      toast('Wrong master password.');
+    }
+  });
+  $('closeMasterBtn')?.addEventListener('click',()=> $('masterModal').classList.remove('show'));
+  $('masterModal')?.addEventListener('click',e=>{ if(e.target.id === 'masterModal') $('masterModal').classList.remove('show'); });
+  $('saveMasterPasswordsBtn')?.addEventListener('click',()=>{
+    const staffPass = ($('masterStaffPassword').value || '').trim();
+    const adminPass = ($('masterAdminPassword').value || '').trim();
+    if(!staffPass || !adminPass){ toast('Staff and admin passwords cannot be blank.'); return; }
+    setSavedPasswords(staffPass, adminPass);
+    sessionStorage.removeItem('vardaStaffAccess');
+    setAdminMode(false);
+    $('masterModal').classList.remove('show');
+    applyStaffAccess();
+    toast('Passwords updated. Please login again.');
+  });
+  $('resetMasterPasswordsBtn')?.addEventListener('click',()=>{
+    if(!confirm('Reset Staff and Admin passwords to the default passwords?')) return;
+    localStorage.removeItem('vardaStaffPassword');
+    localStorage.removeItem('vardaAdminPassword');
+    $('masterStaffPassword').value = DEFAULT_STAFF_ACCESS_PASSWORD;
+    $('masterAdminPassword').value = DEFAULT_ADMIN_PASSWORD;
+    sessionStorage.removeItem('vardaStaffAccess');
+    setAdminMode(false);
+    applyStaffAccess();
+    toast('Default passwords restored.');
   });
   document.addEventListener('contextmenu',e=>{
     if(!isFormTarget(e.target)){
@@ -650,7 +765,7 @@ function generateFromBulk(){
   if($('bulkMode').value === 'replace') state.menus = rows;
   else state.menus = state.menus.concat(rows);
   renderAll();
-  toast(rows.length + ' printable tags generated at ' + defaultGrams + 'g default serving.');
+  toast(rows.length + ' printable tags nagawa sa ' + defaultGrams + 'g default serving.');
 }
 function updateBulkCount(){
   const count = ($('bulkNames').value || '').split(/\r?\n/).map(x=>x.trim()).filter(Boolean).length;
@@ -673,6 +788,7 @@ function bind(){
   $('clearBtn').addEventListener('click',()=>{ if(confirm('Clear all menus?')){ state.menus=[]; renderAll(); } });
   $('bulkGenerateBtn').addEventListener('click', generateFromBulk);
   $('bulkNames').addEventListener('input', updateBulkCount);
+  $('pasteGuideBtn')?.addEventListener('click',()=>{ $('bulkNames')?.scrollIntoView({behavior:'smooth',block:'center'}); setTimeout(()=>{ $('bulkNames')?.focus(); $('bulkNames')?.select(); },320); });
   $('estimateAllBtn').addEventListener('click',()=>{ state.menus.forEach(m=>{const est=estimate(m.name,m.grams);m.calories=est.calories;m.allergen=est.allergen;}); renderAll(); toast('All menus generated.'); });
   $('printBtn').addEventListener('click',()=>{ autoFitAllTags(); window.print(); });
   $('saveBtn').addEventListener('click',saveJson);
@@ -707,17 +823,17 @@ function loadPersisted(){
   normalizeMenus();
 }
 function saveJson(){
-  if(!isAdminUnlocked()){ toast('Admin unlock required to save/export system data.'); return; }
+  if(!isAdminUnlocked()){ toast('Admin unlock required to save file.'); return; }
   const blob=new Blob([JSON.stringify(state,null,2)],{type:'application/json'});
-  const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='price-tag-designer-data.json'; a.click(); URL.revokeObjectURL(a.href); toast('JSON file downloaded.');
+  const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='varda-price-tag-menu-file.json'; a.click(); URL.revokeObjectURL(a.href); toast('Menu file saved.');
 }
 function importJson(e){
-  if(!isAdminUnlocked()){ toast('Admin unlock required to import system data.'); e.target.value=''; return; }
+  if(!isAdminUnlocked()){ toast('Admin unlock required to import file.'); e.target.value=''; return; }
   const file=e.target.files[0]; if(!file) return;
   const reader=new FileReader();
   reader.onload=()=>{
-    try{ const data=JSON.parse(reader.result); state={...state,...data}; syncControls(); renderAll(); toast('Imported design data.'); }
-    catch(err){ alert('Invalid JSON file.'); }
+    try{ const data=JSON.parse(reader.result); state={...state,...data}; syncControls(); renderAll(); toast('File imported.'); }
+    catch(err){ alert('Invalid file. Please choose the correct saved menu file.'); }
   };
   reader.readAsText(file);
 }
