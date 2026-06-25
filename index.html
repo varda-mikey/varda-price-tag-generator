@@ -18,7 +18,12 @@
       --logoSize:28px;
       --cols:3;
       --fontScale:1;
+      --titleScale:1;
       --priceScale:1;
+      --titleFont:Inter,Arial,Helvetica,sans-serif;
+      --bodyFont:Inter,Arial,Helvetica,sans-serif;
+      --titleWeight:1000;
+      --bodyWeight:850;
       --autoTextScale:1;
       --autoPriceScale:1;
       --tagPadY:7px;
@@ -41,7 +46,7 @@
       forced-color-adjust:none;
     }
     html{color-scheme:light}
-    body{margin:0;font-family:Inter,Arial,Helvetica,sans-serif;background:var(--bg);color:var(--ink)}
+    body{margin:0;font-family:var(--bodyFont);background:var(--bg);color:var(--ink)}
     header{position:sticky;top:0;z-index:10;background:#111827;color:#fff;padding:12px 18px;display:flex;align-items:center;justify-content:space-between;gap:12px;box-shadow:0 4px 18px rgba(0,0,0,.2)}
     header h1{font-size:18px;margin:0;letter-spacing:.2px}
     header .actions{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}
@@ -79,30 +84,31 @@
     .tagHead{background:linear-gradient(90deg,var(--primary),color-mix(in srgb,var(--primary) 80%,#000));color:#fff;display:flex;align-items:center;gap:calc(6px * var(--autoTextScale) * var(--fitScale));padding:var(--headPadY) var(--headPadX);min-height:auto;flex:0 0 auto}
     .logoBox{width:var(--logoSize);height:var(--logoSize);border-radius:7px;background:#fff;display:inline-flex;align-items:center;justify-content:center;overflow:hidden;flex:0 0 auto;color:var(--primary);font-weight:900;font-size:calc(9px * var(--autoTextScale) * var(--fitScale));text-align:center;line-height:1}
     .logoBox img{width:100%;height:100%;object-fit:contain;display:block}
-    .brandText{min-width:0;font-size:calc(10px * var(--fontScale) * var(--autoTextScale) * var(--fitScale));line-height:1.1;font-weight:900;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .brandText{min-width:0;flex:1;font-family:var(--titleFont);font-size:calc(13px * var(--titleScale) * var(--autoTextScale) * var(--fitScale));line-height:1.02;font-weight:var(--titleWeight);white-space:normal;overflow:hidden;text-transform:uppercase;letter-spacing:.005em;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;text-overflow:ellipsis}
     .tagBody{padding:var(--tagPadY) var(--tagPadX) calc(var(--tagPadY) + 1px);display:flex;flex-direction:column;gap:var(--tagGap);flex:1;min-height:0}
-    .menuName{font-size:calc(17px * var(--fontScale) * var(--autoTextScale) * var(--fitScale));font-weight:1000;line-height:1.02;text-transform:uppercase;color:#111827;min-height:auto;overflow-wrap:anywhere;hyphens:auto}
-    .meta{display:grid;grid-template-columns:1fr 1fr;gap:calc(4px * var(--autoTextScale) * var(--fitScale));font-size:calc(8.5px * var(--fontScale) * var(--autoTextScale) * var(--fitScale));color:#111827}
-    .meta div{background:#fffdf3;border:1.5px solid rgba(17,24,39,.14);border-radius:8px;padding:var(--metaPadY) var(--metaPadX);line-height:1.08;min-height:auto;font-weight:900}
-    .meta b{display:block;color:#374151;font-size:calc(7px * var(--fontScale) * var(--autoTextScale) * var(--fitScale));text-transform:uppercase;letter-spacing:.03em;margin-bottom:1px;font-weight:1000}
+    .menuName{display:none}
+    .meta{display:grid;grid-template-columns:1fr 1fr;gap:calc(4px * var(--autoTextScale) * var(--fitScale));font-family:var(--bodyFont);font-size:calc(8.5px * var(--fontScale) * var(--autoTextScale) * var(--fitScale));color:#111827}
+    .meta div{background:#fffdf3;border:1.5px solid rgba(17,24,39,.14);border-radius:8px;padding:var(--metaPadY) var(--metaPadX);line-height:1.08;min-height:auto;font-weight:var(--bodyWeight)}
+    .wideMeta{grid-column:1 / -1}
+    .meta b{display:block;color:#374151;font-size:calc(7px * var(--fontScale) * var(--autoTextScale) * var(--fitScale));text-transform:uppercase;letter-spacing:.03em;margin-bottom:1px;font-weight:var(--bodyWeight)}
     .calorieMeta,.allergenMeta{background:color-mix(in srgb,var(--secondary) 25%,#fff)!important;border:2px solid color-mix(in srgb,var(--primary) 40%,#fff)!important;color:#111827}
     .allergenMeta{grid-column:1/-1;background:color-mix(in srgb,var(--primary) 10%,#fff)!important}
     .priceArea{margin-top:auto;display:grid;grid-template-columns:.82fr 1.34fr;gap:calc(6px * var(--autoTextScale) * var(--fitScale));align-items:stretch;min-height:0}
     .priceBlock{background:#fff;border-radius:12px;padding:var(--pricePad);text-align:center;border:2px solid rgba(17,24,39,.18);display:flex;flex-direction:column;justify-content:center;min-height:auto;overflow:hidden}
-    .priceBlock .label{font-size:calc(7px * var(--fontScale) * var(--autoTextScale) * var(--fitScale));font-weight:1000;text-transform:uppercase;color:#111827;margin:0;letter-spacing:.04em}
+    .priceBlock .label{font-size:calc(7px * var(--fontScale) * var(--autoTextScale) * var(--fitScale));font-weight:var(--bodyWeight);text-transform:uppercase;color:#111827;margin:0;letter-spacing:.04em}
     .priceBlock .price{font-size:calc(23px * var(--priceScale) * var(--autoPriceScale) * var(--fitScale));font-weight:1000;line-height:.9;color:#111827;letter-spacing:-1px;white-space:nowrap}
     .halfBlock{background:var(--secondary);border:calc(3px * var(--autoTextScale) * var(--fitScale)) solid var(--primary);border-radius:14px;padding:var(--pricePad);text-align:center;display:flex;flex-direction:column;justify-content:center;box-shadow:0 0 0 3px rgba(215,25,32,.10);min-height:auto;position:relative;overflow:hidden}
-    .halfBlock .label{font-size:calc(9px * var(--fontScale) * var(--autoTextScale) * var(--fitScale));font-weight:1000;text-transform:uppercase;color:var(--primary);margin:0;letter-spacing:.04em}
+    .halfBlock .label{font-size:calc(9px * var(--fontScale) * var(--autoTextScale) * var(--fitScale));font-weight:var(--bodyWeight);text-transform:uppercase;color:var(--primary);margin:0;letter-spacing:.04em}
     .halfBlock .price{font-size:calc(34px * var(--priceScale) * var(--autoPriceScale) * var(--fitScale));font-weight:1100;line-height:.86;color:var(--primary);white-space:nowrap;letter-spacing:-1px}
-    .noteLine{font-size:calc(8px * var(--fontScale) * var(--autoTextScale) * var(--fitScale));color:#374151;line-height:1.08;min-height:0;font-weight:700}
+    .noteLine{font-family:var(--bodyFont);font-size:calc(8px * var(--fontScale) * var(--autoTextScale) * var(--fitScale));color:#374151;line-height:1.08;min-height:0;font-weight:var(--bodyWeight)}
     .compact .tag{min-height:34mm}
     .compact .tagBody{gap:calc(4px * var(--autoTextScale) * var(--fitScale));padding:calc(5px * var(--autoTextScale)) calc(7px * var(--autoTextScale))}
-    .compact .menuName{font-size:calc(14px * var(--fontScale) * var(--autoTextScale) * var(--fitScale));min-height:auto}
+    .compact .menuName{display:none}
     .compact .priceBlock{min-height:auto}
     .classic .tag{border-color:#111827;background:#fff}
     .classic .tagHead{background:var(--primary)}
     .bold .tag{border-width:3px;box-shadow:inset 0 0 0 3px var(--secondary)}
-    .bold .menuName{font-size:calc(19px * var(--fontScale) * var(--autoTextScale) * var(--fitScale))}
+    .bold .menuName{display:none}
     .noHalf .priceArea{grid-template-columns:1fr}
     .noHalf .halfBlock{display:none}
     .tag.noHalf .priceArea{grid-template-columns:1fr}
@@ -213,13 +219,13 @@
     <h2><span>1</span> Global design</h2>
     <div class="controls">
       <div class="full">
-        <label>Business / header name</label>
+        <label>System brand name / app title</label>
         <input id="brandName" value="VARDA GROUP" />
       </div>
       <div class="full">
         <label>Upload logo — applies to all tags</label>
         <input id="logoUpload" type="file" accept="image/*" />
-        <div class="hint">Logo will appear small at the top of every price tag.</div>
+        <div class="hint">Logo will appear on the red header beside the viand name.</div>
       </div>
       <div><label>Primary color</label><input id="primaryColor" type="color" value="#d71920"></div>
       <div><label>Price highlight</label><input id="secondaryColor" type="color" value="#ffd400"></div>
@@ -230,10 +236,15 @@
       <div><label>Columns per page</label><input id="columns" type="range" min="1" max="5" value="3"><span id="columnsLabel" class="hint">3 columns</span></div>
       <div><label>Tag width (cm)</label><input id="tagWidthCm" type="number" min="2" max="20" step="0.1" value="5.8"></div>
       <div><label>Tag height (cm)</label><input id="tagHeightCm" type="number" min="2" max="20" step="0.1" value="4.3"></div>
-      <div class="full"><div class="hint"><b>Auto-fit is ON:</b> text, spacing, calories, allergens, full price, and half price adjust automatically to the selected tag size.</div></div>
+      <div class="full"><div class="hint"><b>Auto-fit is ON:</b> logo, viand name, calories, allergens, full price, and half price adjust automatically to the selected tag size.</div></div>
       <div class="full adminLockedNotice">🔒 Staff Mode is active. Brand, logo, colors, design style, and font/price sizing are protected. Use Admin Unlock to change system design settings.</div>
-      <div><label>Font size</label><input id="fontScale" type="range" min="0.75" max="1.35" step="0.05" value="1"><span id="fontScaleLabel" class="hint">100%</span></div>
-      <div><label>Price size</label><input id="priceScale" type="range" min="0.85" max="1.35" step="0.05" value="1"><span id="priceScaleLabel" class="hint">100%</span></div>
+      <div><label>Viand name font style</label><select id="titleFont"><option value="Inter,Arial,Helvetica,sans-serif">Clean Sans / Default</option><option value="Arial,Helvetica,sans-serif">Arial</option><option value="'Arial Black',Arial,sans-serif">Arial Black</option><option value="Verdana,Geneva,sans-serif">Verdana</option><option value="Tahoma,Geneva,sans-serif">Tahoma</option><option value="'Trebuchet MS',Arial,sans-serif">Trebuchet MS</option><option value="'Segoe UI',Arial,sans-serif">Segoe UI</option><option value="'Century Gothic',Arial,sans-serif">Century Gothic</option><option value="Georgia,serif">Georgia</option><option value="'Times New Roman',Times,serif">Times New Roman</option><option value="'Courier New',Courier,monospace">Courier New</option><option value="Impact,Haettenschweiler,sans-serif">Impact</option></select></div>
+      <div><label>Viand name boldness</label><select id="titleWeight"><option value="400">Regular</option><option value="600">Slight Bold</option><option value="700">Bold</option><option value="800">Extra Bold</option><option value="900">Heavy</option><option value="1000">Maximum Bold</option></select></div>
+      <div><label>Viand name size</label><input id="titleScale" type="range" min="0.45" max="1.65" step="0.05" value="1"><span id="titleScaleLabel" class="hint">100%</span></div>
+      <div><label>Details font style</label><select id="bodyFont"><option value="Inter,Arial,Helvetica,sans-serif">Clean Sans / Default</option><option value="Arial,Helvetica,sans-serif">Arial</option><option value="'Arial Black',Arial,sans-serif">Arial Black</option><option value="Verdana,Geneva,sans-serif">Verdana</option><option value="Tahoma,Geneva,sans-serif">Tahoma</option><option value="'Trebuchet MS',Arial,sans-serif">Trebuchet MS</option><option value="'Segoe UI',Arial,sans-serif">Segoe UI</option><option value="'Century Gothic',Arial,sans-serif">Century Gothic</option><option value="Georgia,serif">Georgia</option><option value="'Times New Roman',Times,serif">Times New Roman</option><option value="'Courier New',Courier,monospace">Courier New</option><option value="Impact,Haettenschweiler,sans-serif">Impact</option></select></div>
+      <div><label>Details boldness</label><select id="bodyWeight"><option value="400">Regular</option><option value="600">Slight Bold</option><option value="700">Bold</option><option value="800">Extra Bold</option><option value="900">Heavy</option><option value="1000">Maximum Bold</option></select></div>
+      <div><label>Details font size</label><input id="fontScale" type="range" min="0.40" max="1.55" step="0.05" value="1"><span id="fontScaleLabel" class="hint">100%</span></div>
+      <div><label>Price size</label><input id="priceScale" type="range" min="0.75" max="1.45" step="0.05" value="1"><span id="priceScaleLabel" class="hint">100%</span></div>
       <div><label>Default show half serving</label><select id="showHalf"><option value="yes">Yes</option><option value="no">No</option></select></div>
     </div>
 
@@ -327,8 +338,8 @@ CHICKEN INASAL</textarea>
       <div class="protectionBox">
         <b>Protection Note:</b> This file has staff access password, staff-mode lock, copy/right-click deterrent, shortcut blocking, and official-use notice. Because it is an offline HTML file, it cannot be 100% copy-proof if someone has the file. For stronger protection, use an online version with login and server control.
       </div>
-      <p><b>Staff can edit:</b> menu names, grams, prices, half-price availability, calories, allergens, notes, paper size, orientation, columns, and actual tag width/height in cm.</p>
-      <p><b>Admin unlock controls:</b> brand name, logo, colors, design style, font size, price size, and Save File / Import File function.</p>
+      <p><b>Staff can edit:</b> menu names, grams, prices, half-price availability, calories, allergens, notes, paper size, orientation, columns, and actual tag width/height in cm. The viand name appears beside the logo on the red tag header.</p>
+      <p><b>Admin unlock controls:</b> brand name, logo, colors, design style, font styles, font sizes, price size, and Save File / Import File function.</p>
       <p><b>Master Control:</b> supervisor-only password panel for changing the Staff Opening Password and Admin Unlock Password.</p>
       <div class="protectedFoot">© Varda Group. Created by Edmar Rizabal Casuncad, June 2026. Unauthorized copying, modification, resale, distribution, or use outside Varda Group is not allowed. Protection code: VFG-PTG-2026.</div>
     </div>
@@ -396,7 +407,7 @@ let state = {
   logo:'',
   brand:'VARDA GROUP',
   primary:'#d71920', secondary:'#ffd400', accent:'#ffffff',
-  paperSize:'A4', orientation:'portrait', style:'bold', columns:3, fontScale:1, priceScale:1, tagWidthCm:5.8, tagHeightCm:4.3, showHalf:'yes', zoom:.72,
+  paperSize:'A4', orientation:'portrait', style:'bold', columns:3, titleFont:'Inter,Arial,Helvetica,sans-serif', bodyFont:'Inter,Arial,Helvetica,sans-serif', titleWeight:1000, bodyWeight:850, titleScale:1, fontScale:1, priceScale:1, tagWidthCm:5.8, tagHeightCm:4.3, showHalf:'yes', zoom:.72,
   menus:[]
 };
 const sampleMenus = [
@@ -415,7 +426,7 @@ function setSavedPasswords(staffPass, adminPass){
   if(staffPass) localStorage.setItem('vardaStaffPassword', staffPass);
   if(adminPass) localStorage.setItem('vardaAdminPassword', adminPass);
 }
-const adminOnlyIds = ['brandName','logoUpload','primaryColor','secondaryColor','accentColor','tagStyle','fontScale','priceScale','saveBtn'];
+const adminOnlyIds = ['brandName','logoUpload','primaryColor','secondaryColor','accentColor','tagStyle','titleFont','titleWeight','titleScale','bodyFont','bodyWeight','fontScale','priceScale','saveBtn'];
 function isFormTarget(el){ return el && ['INPUT','TEXTAREA','SELECT','BUTTON','LABEL'].includes(el.tagName); }
 function isAdminUnlocked(){ return sessionStorage.getItem('vardaAdminUnlocked') === 'yes'; }
 function setAdminMode(unlocked){
@@ -693,7 +704,12 @@ function renderPreview(){
   document.documentElement.style.setProperty('--accent',state.accent);
   document.documentElement.style.setProperty('--cols',state.columns);
   document.documentElement.style.setProperty('--fontScale',state.fontScale);
+  document.documentElement.style.setProperty('--titleScale',state.titleScale||1);
   document.documentElement.style.setProperty('--priceScale',state.priceScale);
+  document.documentElement.style.setProperty('--titleFont',state.titleFont||'Inter,Arial,Helvetica,sans-serif');
+  document.documentElement.style.setProperty('--bodyFont',state.bodyFont||'Inter,Arial,Helvetica,sans-serif');
+  document.documentElement.style.setProperty('--titleWeight',state.titleWeight||1000);
+  document.documentElement.style.setProperty('--bodyWeight',state.bodyWeight||850);
   document.documentElement.style.setProperty('--tagW',(Number(state.tagWidthCm)||5.8)+'cm');
   document.documentElement.style.setProperty('--tagH',(Number(state.tagHeightCm)||4.3)+'cm');
   updateAutoSizing();
@@ -701,6 +717,7 @@ function renderPreview(){
   document.documentElement.style.setProperty('--paperW',dims.w+'mm');
   document.documentElement.style.setProperty('--paperH',dims.h+'mm');
   $('columnsLabel').textContent=state.columns+' column'+(state.columns>1?'s':'');
+  $('titleScaleLabel').textContent=Math.round((state.titleScale||1)*100)+'%';
   $('fontScaleLabel').textContent=Math.round(state.fontScale*100)+'%';
   $('priceScaleLabel').textContent=Math.round(state.priceScale*100)+'%';
   $('zoomLabel').textContent=Math.round(state.zoom*100)+'%';
@@ -716,10 +733,9 @@ function renderPreview(){
     tag.innerHTML=`
       <div class="tagHead">
         <div class="logoBox">${state.logo ? `<img src="${state.logo}" alt="logo">` : 'LOGO'}</div>
-        <div class="brandText">${escapeHtml(state.brand)}</div>
+        <div class="brandText">${escapeHtml(m.name || 'Menu Name')}</div>
       </div>
       <div class="tagBody">
-        <div class="menuName">${escapeHtml(m.name || 'Menu Name')}</div>
         <div class="meta">
           <div class="servingMeta"><b>Serving</b>${escapeHtml(m.grams || 0)} g</div>
           <div class="calorieMeta"><b>Calories</b>${escapeHtml(m.calories || '—')} kcal</div>
@@ -773,7 +789,7 @@ function updateBulkCount(){
 }
 function bind(){
   const bindMap = [
-    ['brandName','brand'],['primaryColor','primary'],['secondaryColor','secondary'],['accentColor','accent'],['paperSize','paperSize'],['orientation','orientation'],['tagStyle','style'],['columns','columns'],['fontScale','fontScale'],['priceScale','priceScale'],['tagWidthCm','tagWidthCm'],['tagHeightCm','tagHeightCm'],['showHalf','showHalf'],['zoom','zoom']
+    ['brandName','brand'],['primaryColor','primary'],['secondaryColor','secondary'],['accentColor','accent'],['paperSize','paperSize'],['orientation','orientation'],['tagStyle','style'],['columns','columns'],['titleFont','titleFont'],['titleWeight','titleWeight'],['titleScale','titleScale'],['bodyFont','bodyFont'],['bodyWeight','bodyWeight'],['fontScale','fontScale'],['priceScale','priceScale'],['tagWidthCm','tagWidthCm'],['tagHeightCm','tagHeightCm'],['showHalf','showHalf'],['zoom','zoom']
   ];
   bindMap.forEach(([id,key])=>{
     const el=$(id); el.addEventListener('input',()=>{ state[key]=(el.type==='range'||el.type==='number')? Number(el.value):el.value; renderPreview(); persist(); });
@@ -797,6 +813,8 @@ function bind(){
 function syncControls(){
   $('brandName').value=state.brand; $('primaryColor').value=state.primary; $('secondaryColor').value=state.secondary; $('accentColor').value=state.accent;
   $('paperSize').value=state.paperSize; $('orientation').value=state.orientation; $('tagStyle').value=state.style; $('columns').value=state.columns;
+  $('titleFont').value=state.titleFont||'Inter,Arial,Helvetica,sans-serif'; $('titleWeight').value=state.titleWeight||1000; $('titleScale').value=state.titleScale||1;
+  $('bodyFont').value=state.bodyFont||'Inter,Arial,Helvetica,sans-serif'; $('bodyWeight').value=state.bodyWeight||850;
   $('fontScale').value=state.fontScale; $('priceScale').value=state.priceScale; $('tagWidthCm').value=state.tagWidthCm||5.8; $('tagHeightCm').value=state.tagHeightCm||4.3; $('showHalf').value=state.showHalf; $('zoom').value=state.zoom;
 }
 function persist(){ localStorage.setItem('priceTagDesignerState',JSON.stringify(state)); }
@@ -810,6 +828,13 @@ function cleanGeneratedText(value){
 function normalizeMenus(){
   state.tagWidthCm = Number(state.tagWidthCm) || 5.8;
   state.tagHeightCm = Number(state.tagHeightCm) || 4.3;
+  state.titleFont = state.titleFont || 'Inter,Arial,Helvetica,sans-serif';
+  state.bodyFont = state.bodyFont || 'Inter,Arial,Helvetica,sans-serif';
+  state.titleWeight = Number(state.titleWeight) || 1000;
+  state.bodyWeight = Number(state.bodyWeight) || 850;
+  state.titleScale = Number(state.titleScale) || 1;
+  state.fontScale = Number(state.fontScale) || 1;
+  state.priceScale = Number(state.priceScale) || 1;
   state.menus = (state.menus || []).map(m=>({
     halfAvailable:true, notes:'', halfPrice:'', ...m,
     allergen: cleanGeneratedText(m.allergen),
